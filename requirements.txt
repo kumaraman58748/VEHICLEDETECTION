@@ -1,5 +1,7 @@
-torch
+streamlit
 ultralytics
+pillow
+numpy
 opencv-python
 pandas
 openpyxl
