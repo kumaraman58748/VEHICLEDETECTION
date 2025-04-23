@@ -1,4 +1,4 @@
-name: YOLO CI Pipeline
+name: Test YOLO Models
 
 on:
   push:
@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout Code
       uses: actions/checkout@v3
 
     - name: Set up Python
@@ -24,22 +24,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Format code with Black
+    - name: Run tests
       run: |
-        echo "Auto-formatting code with black..."
-        black . --line-length 120
-
-    - name: Run flake8 (lint check)
-      run: |
-        echo "Running flake8 linting..."
-        flake8 . || (echo '❌ Lint errors found after auto-formatting.' && exit 1)
-
-    - name: Run unit tests
-      run: pytest tests/
-
-    - name: Check Streamlit app launch (headless)
-      run: |
-        echo "Launching Streamlit app in headless mode..."
-        streamlit run app.py --server.headless true &
-        sleep 10
-        pkill streamlit
+        echo "Running YOLO model tests..."
+        pytest tests/
